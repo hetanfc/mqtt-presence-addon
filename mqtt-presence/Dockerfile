@@ -7,7 +7,7 @@ RUN \
         python3 \
         py3-pip \
         jq \
-    && pip3 install --no-cache-dir --break-system-packages paho-mqtt
+    && pip3 install --no-cache-dir --break-system-packages paho-mqtt requests
 
 # Imposta la working directory
 WORKDIR /app

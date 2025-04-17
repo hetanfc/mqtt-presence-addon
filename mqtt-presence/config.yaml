@@ -1,5 +1,5 @@
 name: "MQTT Presence Reporter"
-version: "1.0.0"
+version: "1.1.0"
 slug: "mqtt-presence"
 description: "Annuncia lo stato di Home Assistant a un broker MQTT esterno"
 startup: application
