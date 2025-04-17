@@ -1,15 +1,12 @@
-# Usa un'immagine base leggera con Python
-FROM python:3.11-slim
+ARG BUILD_FROM
+FROM ${BUILD_FROM}
+
+# Installa dipendenze necessarie: Python, pip, paho-mqtt e jq
+RUN apk add --no-cache python3 py3-pip jq && \
+    pip3 install --no-cache-dir paho-mqtt
 
 # Imposta la working directory
 WORKDIR /app
-
-# Installa dipendenze necessarie: paho-mqtt e jq per leggere options.json
-RUN apt-get update && \
-    apt-get install -y jq && \
-    pip install --no-cache-dir paho-mqtt && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Copia gli script nell'immagine
 COPY mqtt_presence.py run.sh ./
