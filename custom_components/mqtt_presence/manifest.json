@@ -1,0 +1,10 @@
+{
+  "domain": "mqtt_presence",
+  "name": "MQTT Presence",
+  "version": "1.0.0",
+  "codeowners": ["@hetanfc"],
+  "config_flow": true,
+  "documentation": "https://github.com/hetanfc/mqtt-presence-addon",
+  "iot_class": "local_push",
+  "requirements": []
+}
