@@ -1,0 +1,14 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connetti al broker MQTT esterno",
+        "description": "Configurazione rilevata dall'add-on:\n\n- **Broker:** {host}:{port}\n- **Device:** {device_name}\n\nConferma per creare il sensore di connettività."
+      }
+    },
+    "abort": {
+      "already_configured": "L'integrazione è già configurata.",
+      "addon_not_found": "Add-on 'MQTT Presence Reporter' non trovato o non ancora avviato. Installa e avvia prima il componente aggiuntivo, poi riprova."
+    }
+  }
+}

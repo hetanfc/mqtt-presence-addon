@@ -12,8 +12,9 @@ RUN \
 # Imposta la working directory
 WORKDIR /app
 
-# Copia gli script nell'immagine
+# Copia gli script e i file dell'integrazione nell'immagine
 COPY mqtt_presence.py run.sh ./
+COPY integration/ /app/integration/
 
 # Rendi eseguibile lo script di avvio
 RUN chmod +x /app/run.sh
