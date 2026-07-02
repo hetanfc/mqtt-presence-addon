@@ -12,7 +12,7 @@ homeassistant/<device_name>/status
 
 It also registers an MQTT **last-will** message so the broker automatically publishes `offline` on that same topic if the connection is ever lost unexpectedly.
 
-Both messages are sent with the **retain** flag, so any subscriber that connects later will immediately see the current status.
+Both messages are sent with the **retain** flag, so any subscriber that connects later will immediately see the current status. The payload is a JSON object containing the status and (if configured) the Telegram chat ID to notify, e.g. `{"status": "offline", "telegram_chat_id": "123456789"}` — this lets a monitoring server tell which Telegram chat to alert without any extra configuration on its side.
 
 ## Installation
 
@@ -33,6 +33,7 @@ Both messages are sent with the **retain** flag, so any subscriber that connects
 | `mqtt_port` | Yes | `1883` | Port of the MQTT broker. |
 | `mqtt_username` | Yes | — | Username for broker authentication. |
 | `mqtt_password` | Yes | — | Password for broker authentication. |
+| `telegram_chat_id` | No | empty | Telegram chat ID that a monitoring server should notify when this device goes offline/online. Included in the status payload; ignored if left empty. |
 
 ### Example
 
@@ -42,20 +43,21 @@ mqtt_host: "192.168.1.10"
 mqtt_port: 1883
 mqtt_username: "mqttuser"
 mqtt_password: "secret"
+telegram_chat_id: "123456789"
 ```
 
 With this configuration the add-on publishes to:
 
 ```
-homeassistant/home-assistant/status  →  "online" / "offline"
+homeassistant/home-assistant/status  →  {"status": "online", "telegram_chat_id": "123456789"}
 ```
 
 ## MQTT topics
 
 | Topic | Value | When |
 |---|---|---|
-| `homeassistant/<device_name>/status` | `online` | Add-on starts and connects successfully |
-| `homeassistant/<device_name>/status` | `offline` | Connection is lost (last-will) |
+| `homeassistant/<device_name>/status` | `{"status": "online", "telegram_chat_id": "..."}` | Add-on starts and connects successfully |
+| `homeassistant/<device_name>/status` | `{"status": "offline", "telegram_chat_id": "..."}` | Connection is lost (last-will) |
 
 ## Supported architectures
 
